@@ -11,6 +11,7 @@ var pieColors = ["rgb(116,126,222)",
                 "rgb(233,198,171)",
                 "rgb(222,229,176)",
                 "rgb(195,219,131)"];
+var pieGaugeHeight = 400;
 
 Plotly.d3.json("/names", (error, nameList)=>{
     if (error) return console.warn(error);
@@ -84,7 +85,15 @@ function pieBubble(sampleData, init=false){
             }
         };
         
-        var pieLayout={};
+        var pieLayout={
+            margin:{
+                t:20,
+                b:40,
+                l:30,
+                r:10,
+            },
+            height: pieGaugeHeight,
+        };
 
         function sizeMap(x) {
             return Math.pow(x+3,0.9)
@@ -110,6 +119,9 @@ function pieBubble(sampleData, init=false){
             },
             yaxis: {
                 range: [bubbleY[0]*-0.2,bubbleY[0]*2]
+            },
+            margin: {
+                t:10
             }
         };
 
@@ -217,6 +229,13 @@ function gaugePlot(datum, init=false) {
         title: `Washing Frequency (per week)`,
         // height: 1000,
         // width: 1000,
+        height: pieGaugeHeight,
+        margin: {
+            t:50,
+            b:0,
+            l:20,
+            r:20,
+        },
         xaxis: {
             zeroline:false, 
             showticklabels:false,
