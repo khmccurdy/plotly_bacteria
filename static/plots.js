@@ -1,6 +1,17 @@
 var $dropDown = Plotly.d3.select("#selDataset");
 var $metaPanel = Plotly.d3.select("#metadata-panel");
 
+var pieColors = ["rgb(116,126,222)",
+                "rgb(230,163,117)",
+                "rgb(168,202,144)",
+                "rgb(213,207,202)",
+                "rgb(217,117,117)",
+                "rgb(148,169,248)",
+                "rgb(132,181,137)",
+                "rgb(233,198,171)",
+                "rgb(222,229,176)",
+                "rgb(195,219,131)"];
+
 Plotly.d3.json("/names", (error, nameList)=>{
     if (error) return console.warn(error);
     for (var i=0; i<nameList.length; i++) {
@@ -68,6 +79,9 @@ function pieBubble(sampleData, init=false){
             hovertext: pieDesc,
             hoverinfo: "percent+text",
             type: "pie",
+            marker: {
+                colors: pieColors,
+            }
         };
         
         var pieLayout={};
@@ -154,6 +168,7 @@ function gaugePlot(datum, init=false) {
     var scaleLabels = [...Array(numLevels).keys()]
                         .map(x=>`${x}-${x+1}`)
                         .sort((a,b)=>true);
+
     function threeColorLerp(value){
         var color1 = [132,181,137];
         var color2 = [213,229,153];
