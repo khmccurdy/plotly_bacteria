@@ -177,7 +177,7 @@ function gaugePlot(datum, init=false) {
         hoverinfo: 'text'
     };
 
-    var scaleLabels = [...Array(numLevels).keys()]
+    var scaleLabels = Plotly.d3.range(numLevels)
                         .map(x=>`${x}-${x+1}`)
                         .sort((a,b)=>true);
 
@@ -197,16 +197,16 @@ function gaugePlot(datum, init=false) {
 
         return `rgb(${newColor[0]},${newColor[1]},${newColor[2]})`
     }
-    var scaleColors = '';
+    // var scaleColors = '';
 
     var traceScale = { 
-        values: [...[...Array(numLevels).keys()].map(x=>50/numLevels), 50],
+        values: [...Plotly.d3.range(numLevels).map(x=>50/numLevels), 50],
         rotation: 90,
         text: scaleLabels,
         textinfo: 'text',
         textposition:'inside',
         marker: { 
-            colors: [...[...Array(numLevels).keys()]
+            colors: [...Plotly.d3.range(numLevels)
                         .map(x=>threeColorLerp(x/numLevels)),
                     "rgba(0,0,0,0)"],
         },
